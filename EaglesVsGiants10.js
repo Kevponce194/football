@@ -1,5 +1,5 @@
 
-/*-----------EaglesVsGiants10.js  test------------
+/*-----------EaglesVsGiants10.js ------------
 
 This program loops through an array of objects and returns
 the total number of Comparison pts based on two active players based and their position.value.
