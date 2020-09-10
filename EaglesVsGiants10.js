@@ -6,9 +6,7 @@ the total number of Comparison pts based on two active players based and their p
 The 2 position.value('s) that are active is based on wheter a Run or Pass is selected.  
 https://nodejs.org/docs/latest/api/process.html
 process.argv
-
 */
-
 
 let EaglesComparisonPts = 0;
 let GiantsComparisonPts = 0;
@@ -16,19 +14,21 @@ let GiantsComparisonPts = 0;
 let Eagles_Score = 0;
 let Giants_Score = 0;
 
-console.log(process.argv)
-/* --- This determines who has the Ball ---*/
+// -----   Below line will show all process.argv arguments in console  -----
+ //console.log(process.argv)
 
+/* --- This determines who has the Ball ---*/
 let whoHasBall = process.argv[2]
 
 /* --- This determines if the play 
 is a Run or a Pass ---*/
 let play = process.argv[3]
-/*
+
+/* ---- the next  if statement is not needed
+ while using process.argv to input run or pass  -----
 if (Math.floor((Math.random() * 2) + 1) == 2) {
     play = "Pass";
-};
-*/
+};   */
 
 /* --- This simply prints to the screen 
 who has the Ball and what type of play it is. ---*/
