@@ -6,6 +6,9 @@ let getRandNum = function (start, range) {
     return getRand;
 }
 
+var eaglesScore = 0;
+var giantsScore = 0;
+
 let Eagles = [{
         team: "Eagles",
         name: "Wentz",
@@ -83,14 +86,11 @@ let Giants = [{
 // --- This combines the arrays
 var comboArray = [...Eagles, ...Giants];
 
-//let offense = Eagles;
-
-let offTeamComparisonPts = 0;
-let defTeamComparisonPts = 0;
+var offTeamComparisonPts = 0;
+var defTeamComparisonPts = 0;
 
 let offenseStr = process.argv[2];
-//console.log(String(process.argv[2]));
-console.log(process.argv[2]);
+//console.log(process.argv[2]);
 
 if (offenseStr == "Eagles") {
     var defenseStr = "Giants";
@@ -98,6 +98,8 @@ if (offenseStr == "Eagles") {
     offenseStr = "Giants";
     defenseStr = "Eagles";
 };
+
+let playStr = process.argv[3];
 
 for (let x = 0; x < comboArray.length; x++) {
 
@@ -109,15 +111,22 @@ for (let x = 0; x < comboArray.length; x++) {
 
     let PlayersPts = (AdjPlayerPts(comboArray[x].random));
 
-    if ((comboArray[x].team === offenseStr) && (comboArray[x].position === "QB" || comboArray[x].position === "WR")) {
-        //if (comboArray[x].position === "QB" || comboArray[x].position === "WR") {
+    let player1 = "QB"; 
+    let player2 = "";
+
+            if (playStr == "Run") {
+                player2 = "RB";
+            } else {
+                player2 = "WR";
+            };
+
+    if ((comboArray[x].team === offenseStr) && (comboArray[x].position === player1 || comboArray[x].position === player2)) {
         console.log("------------------");
         console.log((comboArray[x].name) + " is active on this play and has");
         console.log((PlayersPts) + " pts");
         offTeamComparisonPts += PlayersPts;
     };
     if ((comboArray[x].team === defenseStr) && (comboArray[x].position === "DB" || comboArray[x].position === "DT")) {
-        //if (comboArray[x].position === "DB" || comboArray[x].position === "DT") {
         console.log("------------------");
         console.log((comboArray[x].name) + " is active on this play and has");
         console.log((PlayersPts) + " pts");
@@ -129,3 +138,33 @@ console.log("------------------");
 console.log(offenseStr + " have " + offTeamComparisonPts + " Offensive Comparison Points on this play");
 console.log(defenseStr + " have " + defTeamComparisonPts + " Defensive Comparison Points on this play");
 console.log("------------------");
+
+var ComparisonPtsDiff = offTeamComparisonPts - defTeamComparisonPts;
+        console.log("Comparison is " + ComparisonPtsDiff + " pts");
+
+        if (ComparisonPtsDiff > 7) {
+            if (offenseStr == "Eagles") {
+                eaglesScore = eaglesScore + 6;
+            } else {giantsScore = giantsScore + 6;
+            };
+            console.log(offenseStr + " get a Touchdown!");
+        } else if (ComparisonPtsDiff >= 3) {
+            if (offenseStr == "Eagles") {
+                eaglesScore = eaglesScore + 3;
+            } else {giantsScore = giantsScore + 3;
+            };
+            console.log(offenseStr + " get a Touchdown!");
+        } else if (ComparisonPtsDiff < -6) {
+            if (defenseStr == "Eagles") {
+                eaglesScore = eaglesScore + 6;
+            } else {giantsScore = giantsScore + 6;
+            };
+            console.log(defenseStr + " get a Pick 6!");
+        } else {
+            console.log("No scoring on this play");
+        };
+
+console.log("------------------");
+console.log("Eagles " + eaglesScore);
+console.log("Giants " + giantsScore);
+console.log(" ");
